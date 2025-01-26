@@ -1,32 +1,31 @@
-// Import the WebSocket library
 const WebSocket = require('ws');
 
-// Create a new WebSocket server on port 8080
-const wss = new WebSocket.Server({ port: 8080 });
+const wss = new WebSocket.Server({ port: 3000 });
 
-// When a client connects to the WebSocket server
+
 wss.on('connection', (ws) => {
-    console.log('A new client connected');
+    console.log('New client connected');
 
-    // Send a message to the connected client
-    ws.send('Welcome to the chat server!');
-
-    // When a message is received from the client
     ws.on('message', (message) => {
-        console.log(`Received message: ${message}`);
-        
-        // Broadcast the message to all connected clients
-        wss.clients.forEach(client => {
-            if (client !== ws && client.readyState === WebSocket.OPEN) {
-                client.send(message);
-            }
-        });
+        console.log('Raw message received:', message); // Debugging log
+        try {
+            const parsedMessage = JSON.parse(message);
+            console.log('Parsed message:', parsedMessage);
+
+            // Broadcast to all clients
+            wss.clients.forEach((client) => {
+                if (client.readyState === WebSocket.OPEN) {
+                    client.send(JSON.stringify({ message: parsedMessage.message }));
+                }
+            });
+        } catch (error) {
+            console.error('Error processing message:', error);
+        }
     });
 
-    // Handle when a client disconnects
     ws.on('close', () => {
-        console.log('A client disconnected');
+        console.log('Client disconnected');
     });
 });
 
-console.log('WebSocket server running on ws://localhost:8080');
+console.log('WebSocket server is running on ws://localhost:8080');

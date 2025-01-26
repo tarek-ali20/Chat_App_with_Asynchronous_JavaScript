@@ -1,16 +1,24 @@
 {
-  "dependencies": {
-    "express": "^4.21.2",
-    "ws": "^8.18.0"
-  },
   "name": "chat_app_with_asynchronous_javascript",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/tarek-ali20/Chat_App_with_Asynchronous_JavaScript.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": ""
+  "bugs": {
+    "url": "https://github.com/tarek-ali20/Chat_App_with_Asynchronous_JavaScript/issues"
+  },
+  "homepage": "https://github.com/tarek-ali20/Chat_App_with_Asynchronous_JavaScript#readme",
+  "description": "",
+  "dependencies": {
+    "ws": "^8.18.0"
+  }
 }
